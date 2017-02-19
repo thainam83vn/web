@@ -61,12 +61,16 @@ limitations under the License.
         }
     </style>
     <title>Cast Hello Text</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!--<iframe class="frame2" src="https://www.youtube.com/embed/nLPpuZ834yA" />
     <iframe class="frame1" src="https://www.youtube.com/embed/z8DLkLnemFY" />-->
     <div id="message">Talk to me</div>
+    <div>
+
+    </div>
 
     <!--<div class="main">
         <div id="divmini" class="mini">
@@ -135,9 +139,10 @@ limitations under the License.
         function displayText(text) {
             console.log(text);
             var url = "https://www.youtube.com/embed?listType=search&list=" + text;
-            document.getElementById('message').innerText = text;
+            //document.getElementById('message').innerText = text;
             //document.getElementById('divmini').innerText = text;
             //document.getElementById('frame1').src = text;
+            $('#message').text(text);
 
             window.castReceiverManager.setApplicationState(text);
             //https://www.youtube.com/embed/jLlSqucqXB0?autoplay=0&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1
