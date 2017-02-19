@@ -25,19 +25,19 @@
         var player;
 
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '562',
-                width: '1000',
-                videoId: 'jLlSqucqXB0',
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onPlayerStateChange': onStateChange
-                }
-            });
+            // player = new YT.Player('player', {
+            //     height: '562',
+            //     width: '1000',
+            //     videoId: 'jLlSqucqXB0',
+            //     playerVars: {
+            //         'autoplay': 0,
+            //         'controls': 0
+            //     },
+            //     events: {
+            //         'onReady': onPlayerReady,
+            //         'onPlayerStateChange': onStateChange
+            //     }
+            // });
         }
 
         function onPlayerReady(event) {
@@ -87,10 +87,10 @@
 
 <body>
     <div id="message">Talk to me</div>
-    <div id="wrapper">
+    <!--<div id="wrapper">
         <div id="player"></div>
         <div id="annotation"></div>
-    </div>
+    </div>-->
 </body>
 
 </html>
