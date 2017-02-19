@@ -20,6 +20,7 @@ limitations under the License.
     <style type="text/css">
         body {
             overflow: hidden;
+            position: relative;
         }
         
         div {
@@ -48,6 +49,7 @@ limitations under the License.
             right: 0px;
             color: #000;
             font-size: 10px;
+            top: 0px;
         }
         
         .frame1 {
@@ -136,6 +138,14 @@ limitations under the License.
                 statusText: 'Application is starting'
             });
             console.log('Receiver Manager started');
+
+            loadVideo("tUQvAffpai0");
+        };
+
+        function loadVideo(text) {
+            var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
+            $("#videocontainer").html("");
+            $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo('#videocontainer');
         };
 
         // utility function to display the text message in the input field
@@ -146,9 +156,7 @@ limitations under the License.
             //document.getElementById('divmini').innerText = text;
             //document.getElementById('frame1').src = text;
             $('#message').text(text);
-            var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
-            $("#videocontainer").html("");
-            $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo('#videocontainer');
+            loadVideo(text);
 
 
             window.castReceiverManager.setApplicationState(text);
