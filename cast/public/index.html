@@ -67,7 +67,7 @@ limitations under the License.
 <body>
     <!--<iframe class="frame2" src="https://www.youtube.com/embed/nLPpuZ834yA" />
     <iframe class="frame1" src="https://www.youtube.com/embed/z8DLkLnemFY" />-->
-    <div id="message">Talk to me</div>
+    <!--<div id="message">Talk to me</div>-->
     <div id="videocontainer">
 
     </div>
@@ -143,7 +143,7 @@ limitations under the License.
             //document.getElementById('divmini').innerText = text;
             //document.getElementById('frame1').src = text;
             $('#message').text(text);
-            var url = "https://www.youtube.com/embed/" + text + "?autoplay=0&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
+            var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
             $("#videocontainer").html("");
             $('<iframe src="' + url + '" frameborder="0" ></iframe>').appendTo('#videocontainer');
 
