@@ -37,6 +37,8 @@ limitations under the License.
         
         .main {
             position: relative;
+            width: 1920px;
+            height: 1080px;
         }
         
         .mini {
@@ -68,7 +70,7 @@ limitations under the License.
     <!--<iframe class="frame2" src="https://www.youtube.com/embed/nLPpuZ834yA" />
     <iframe class="frame1" src="https://www.youtube.com/embed/z8DLkLnemFY" />-->
     <!--<div id="message">Talk to me</div>-->
-    <div id="videocontainer">
+    <div id="videocontainer" class="main">
 
     </div>
 
@@ -145,7 +147,7 @@ limitations under the License.
             $('#message').text(text);
             var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
             $("#videocontainer").html("");
-            $('<iframe src="' + url + '" frameborder="0" ></iframe>').appendTo('#videocontainer');
+            $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo('#videocontainer');
 
 
             window.castReceiverManager.setApplicationState(text);
