@@ -47,6 +47,7 @@ limitations under the License.
             height: 90px;
             right: 0px;
             color: #000;
+            font-size: 10px;
         }
         
         .frame1 {
@@ -67,7 +68,7 @@ limitations under the License.
     <iframe class="frame1" src="https://www.youtube.com/embed/z8DLkLnemFY" />-->
     <!--<div id="message">Talk to me</div>-->
     <div class="main">
-        <div class="mini">
+        <div id="divmini" class="mini">
             NEWS
         </div>
         <iframe id="frame1" class="frame1" />
@@ -135,7 +136,8 @@ limitations under the License.
         function displayText(text) {
             console.log(text);
             //document.getElementById('message').innerText = text;
-            document.getElementById('frame1').src = text;
+            //document.getElementById('frame1').src = text;
+            document.getElementById('divmini').innerText = text;
             window.castReceiverManager.setApplicationState(text);
         };
     </script>
