@@ -1,0 +1,147 @@
+<!--
+Copyright (C) 2014 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        body {
+            overflow: hidden;
+        }
+        
+        div {
+            height: 720PX;
+            width: 1280PX;
+            text-align: center;
+            border: 0px solid silver;
+            display: table-cell;
+            vertical-align: middle;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 40px;
+        }
+        
+        .main {
+            position: relative;
+        }
+        
+        .mini {
+            position: absolute;
+            z-index: 99;
+            background-color: #fff;
+            width: 160px;
+            height: 90px;
+            right: 0px;
+            color: #000;
+            font-size: 10px;
+        }
+        
+        .frame1 {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .frame2 {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <title>Cast Hello Text</title>
+</head>
+
+<body>
+    <!--<iframe class="frame2" src="https://www.youtube.com/embed/nLPpuZ834yA" />
+    <iframe class="frame1" src="https://www.youtube.com/embed/z8DLkLnemFY" />-->
+    <!--<div id="message">Talk to me</div>-->
+
+    <div class="main">
+        <div id="divmini" class="mini">
+            NEWS
+        </div>
+        <iframe id="frame1" class="frame1" />
+    </div>
+    <!--<video controls="controls" class="video-stream" x-webkit-airplay="allow" data-youtube-id="N9oxmRT2YWw" src="http://v20.lscache8.c.youtube.com/videoplayback?sparams=id%2Cexpire%2Cip%2Cipbits%2Citag%2Cratebypass%2Coc%3AU0hPRVRMVV9FSkNOOV9MRllD&amp;itag=43&amp;ipbits=0&amp;signature=D2BCBE2F115E68C5FF97673F1D797F3C3E3BFB99.59252109C7D2B995A8D51A461FF9A6264879948E&amp;sver=3&amp;ratebypass=yes&amp;expire=1300417200&amp;key=yt1&amp;ip=0.0.0.0&amp;id=37da319914f6616c"></video>-->
+
+    <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            cast.receiver.logger.setLevelValue(0);
+            window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+            console.log('Starting Receiver Manager');
+
+            // handler for the 'ready' event
+            castReceiverManager.onReady = function(event) {
+                console.log('Received Ready event: ' + JSON.stringify(event.data));
+                window.castReceiverManager.setApplicationState('Application status is ready...');
+            };
+
+            // handler for 'senderconnected' event
+            castReceiverManager.onSenderConnected = function(event) {
+                console.log('Received Sender Connected event: ' + event.data);
+                console.log(window.castReceiverManager.getSender(event.data).userAgent);
+            };
+
+            // handler for 'senderdisconnected' event
+            castReceiverManager.onSenderDisconnected = function(event) {
+                console.log('Received Sender Disconnected event: ' + event.data);
+                if (window.castReceiverManager.getSenders().length == 0) {
+                    window.close();
+                }
+            };
+
+            // handler for 'systemvolumechanged' event
+            castReceiverManager.onSystemVolumeChanged = function(event) {
+                console.log('Received System Volume Changed event: ' + event.data['level'] + ' ' +
+                    event.data['muted']);
+            };
+
+            // create a CastMessageBus to handle messages for a custom namespace
+            window.messageBus =
+                window.castReceiverManager.getCastMessageBus(
+                    'urn:x-cast:com.google.cast.sample.helloworld');
+
+            // handler for the CastMessageBus message event
+            window.messageBus.onMessage = function(event) {
+                console.log('Message [' + event.senderId + ']: ' + event.data);
+                // display the message from the sender
+                displayText(event.data);
+                // inform all senders on the CastMessageBus of the incoming message event
+                // sender message listener will be invoked
+                window.messageBus.send(event.senderId, event.data);
+            }
+
+            // initialize the CastReceiverManager with an application status message
+            window.castReceiverManager.start({
+                statusText: 'Application is starting'
+            });
+            console.log('Receiver Manager started');
+        };
+
+        // utility function to display the text message in the input field
+        function displayText(text) {
+            console.log(text);
+            var url = "https://www.youtube.com/embed?listType=search&list=" + text;
+            //document.getElementById('message').innerText = text;
+            document.getElementById('divmini').innerText = text;
+            document.getElementById('frame1').src = text;
+
+            window.castReceiverManager.setApplicationState(text);
+        };
+    </script>
+</body>
+
+</html>
