@@ -66,16 +66,13 @@ limitations under the License.
 <body>
     <!--<iframe class="frame2" src="https://www.youtube.com/embed/nLPpuZ834yA" />
     <iframe class="frame1" src="https://www.youtube.com/embed/z8DLkLnemFY" />-->
-    <!--<div id="message">Talk to me</div>-->
-    <div class="main">
+    <div id="message">Talk to me</div>
+    <!--<div class="main">
         <div id="divmini" class="mini">
             NEWS
         </div>
         <iframe id="frame1" class="frame1" />
-
-
-
-    </div>
+    </div>-->
 
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript">
@@ -135,9 +132,9 @@ limitations under the License.
         // utility function to display the text message in the input field
         function displayText(text) {
             console.log(text);
-            //document.getElementById('message').innerText = text;
+            document.getElementById('message').innerText = text;
             //document.getElementById('frame1').src = text;
-            document.getElementById('divmini').innerText = text;
+            //document.getElementById('divmini').innerText = text;
             window.castReceiverManager.setApplicationState(text);
         };
     </script>
