@@ -168,6 +168,14 @@ limitations under the License.
             $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo(id);
         };
 
+        function loadVideoVI(id, text, quality) {
+            $(id).html("");
+            //$('#videocontainer').html("");
+            //$('#divmini').html("");
+            var url = "https://player.vimeo.com/video/" + text + "?autoplay=1";
+            $('<iframe src="' + url + '" frameborder="0" class="frame2" ></iframe>').appendTo(id);
+        };
+
         // utility function to display the text message in the input field
         function displayText(text) {
             console.log(text);
@@ -183,7 +191,7 @@ limitations under the License.
             var frameid = frames[parseInt(data)];
             if (data[1] == "YT")
                 loadVideo(frameid, data[2], qualities[frameid]);
-            else
+            else if (data[1] == "VI")
                 loadVideoFB(frameid, data[2], qualities[frameid]);
 
             window.castReceiverManager.setApplicationState(text);
