@@ -44,8 +44,8 @@ limitations under the License.
             position: absolute;
             z-index: 99;
             background-color: #fff;
-            width: 160px;
-            height: 90px;
+            width: 320px;
+            height: 180px;
             right: 0px;
             color: #000;
             font-size: 10px;
@@ -60,6 +60,12 @@ limitations under the License.
         .frame2 {
             width: 100%;
             height: 100%;
+        }
+        
+        #toolbar {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
         }
     </style>
     <title>Cast Hello Text</title>
@@ -76,6 +82,9 @@ limitations under the License.
     <div id="divmini" class="mini">
         NEWS
     </div>
+    <!--<div id="toolbar">
+        <button id="btnLoadMini">mini</button>
+    </div>-->
 
     <!--<div class="main">
         <div id="divmini" class="mini">
@@ -139,13 +148,15 @@ limitations under the License.
             });
             console.log('Receiver Manager started');
 
-            loadVideo("tUQvAffpai0");
+            loadVideo('#videocontainer', "tUQvAffpai0");
+            loadVideo("#divmini", "k6aiLDAKQ_8");
         };
 
-        function loadVideo(text) {
+        function loadVideo(id, text) {
+
             var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
-            $("#videocontainer").html("");
-            $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo('#videocontainer');
+            $(id).html("");
+            $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo(id);
         };
 
         // utility function to display the text message in the input field
@@ -155,13 +166,20 @@ limitations under the License.
             //document.getElementById('message').innerText = text;
             //document.getElementById('divmini').innerText = text;
             //document.getElementById('frame1').src = text;
-            $('#message').text(text);
-            loadVideo(text);
-
+            //$('#message').text(text);
+            //loadVideo('#videocontainer', text);
+            var frames = ['#videocontainer', '#divmini'];
+            var data = text.split(':');
+            var frameid = frames[parseInt(data)];
+            loadVideo(frameid, data[1]);
 
             window.castReceiverManager.setApplicationState(text);
             //https://www.youtube.com/embed/jLlSqucqXB0?autoplay=0&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1
         };
+
+        // $("#btnLoadMini").click(() => {
+        //     loadVideo("#divmini", "k6aiLDAKQ_8");
+        // });
     </script>
 </body>
 
