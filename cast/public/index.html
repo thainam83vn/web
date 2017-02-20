@@ -154,7 +154,14 @@ limitations under the License.
 
         function loadVideo(id, text, quality) {
 
-            var url = "https://www.youtube.com/embed/" + text + "?vq=small&autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
+            var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
+            $(id).html("");
+            //$('#videocontainer').html("");
+            //$('#divmini').html("");
+            $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo(id);
+        };
+
+        function loadVideoFB(id, url) {
             $(id).html("");
             //$('#videocontainer').html("");
             //$('#divmini').html("");
@@ -174,7 +181,10 @@ limitations under the License.
             var qualities = ['small', 'small'];
             var data = text.split(':');
             var frameid = frames[parseInt(data)];
-            loadVideo(frameid, data[1], qualities[frameid]);
+            if (data[1] == "YT")
+                loadVideo(frameid, data[2], qualities[frameid]);
+            else
+                loadVideoFB(frameid, data[2], qualities[frameid]);
 
             window.castReceiverManager.setApplicationState(text);
             //https://www.youtube.com/embed/jLlSqucqXB0?autoplay=0&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1
