@@ -169,7 +169,7 @@ limitations under the License.
             //$('#message').text(text);
             //loadVideo('#videocontainer', text);
             var frames = ['#videocontainer', '#divmini'];
-            var qualities = ['hd1080', 'small'];
+            var qualities = ['small', 'small'];
             var data = text.split(':');
             var frameid = frames[parseInt(data)];
             loadVideo(frameid, data[1], qualities[frameid]);
