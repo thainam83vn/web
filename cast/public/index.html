@@ -152,9 +152,9 @@ limitations under the License.
             //loadVideo("#divmini", "k6aiLDAKQ_8");
         };
 
-        function loadVideo(id, text) {
+        function loadVideo(id, text, quality) {
 
-            var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1";
+            var url = "https://www.youtube.com/embed/" + text + "?autoplay=1&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1&vq=" + quality;
             $(id).html("");
             $('<iframe src="' + url + '" frameborder="0" class="frame1" ></iframe>').appendTo(id);
         };
@@ -169,9 +169,10 @@ limitations under the License.
             //$('#message').text(text);
             //loadVideo('#videocontainer', text);
             var frames = ['#videocontainer', '#divmini'];
+            var qualities = ['hd1080', 'small'];
             var data = text.split(':');
             var frameid = frames[parseInt(data)];
-            loadVideo(frameid, data[1]);
+            loadVideo(frameid, data[1], qualities[frameid]);
 
             window.castReceiverManager.setApplicationState(text);
             //https://www.youtube.com/embed/jLlSqucqXB0?autoplay=0&controls=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A3000&widgetid=1
